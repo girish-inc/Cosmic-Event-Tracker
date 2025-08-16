@@ -100,7 +100,7 @@ const EventList = ({ events, loading, error }) => {
             </div>
             
             {/* Event Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {dateEvents.map((event) => (
                 <EventCard key={event.id} neo={event} />
               ))}

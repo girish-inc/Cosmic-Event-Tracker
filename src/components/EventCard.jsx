@@ -7,7 +7,7 @@ function EventCard({ neo }) {
   const missDistance = neo.close_approach_data[0]?.miss_distance?.kilometers;
 
   return (
-    <div className="glass-card p-6 m-4 text-white">
+    <div className="glass-card p-6 text-white w-full max-w-sm mx-auto">
       {/* Header with status indicator */}
       <div className="flex justify-between items-start mb-4">
         <h3 className="text-xl font-bold text-white">
