@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Import Tailwind CSS v4 */
+@import "tailwindcss";
 
 /* Ensure max-w-sm is available in production */
 .max-w-sm {
