@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Ensure max-w-sm is available in production */
+.max-w-sm {
+  max-width: 24rem; /* 384px */
+}
+
 @layer base {
   body {
     color: white;

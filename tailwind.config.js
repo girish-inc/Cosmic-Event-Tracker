@@ -4,22 +4,71 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  // Force include essential classes
+  purge: {
+    content: [
+      "./index.html",
+      "./src/**/*.{js,ts,jsx,tsx}",
+    ],
+    safelist: [
+      'max-w-sm',
+      'w-full',
+      'mx-auto',
+      'glass-card'
+    ]
+  },
   safelist: [
+    // Essential card layout classes
     'max-w-sm',
-    'max-w-md',
+    'max-w-md', 
     'max-w-lg',
     'max-w-xl',
+    'max-w-2xl',
+    'max-w-full',
     'w-full',
+    'w-auto',
+    'w-1/2',
+    'w-1/3', 
+    'w-2/3',
     'mx-auto',
+    'my-4',
+    'my-6',
+    
+    // Grid system
     'grid-cols-1',
+    'grid-cols-2', 
+    'grid-cols-3',
     'md:grid-cols-2',
     'lg:grid-cols-3',
+    'xl:grid-cols-4',
+    
+    // Spacing
     'gap-4',
-    'gap-6',
-    'glass-card',
+    'gap-6', 
+    'gap-8',
     'space-y-3',
     'space-y-6',
-    'space-y-12'
+    'space-y-12',
+    
+    // Custom components
+    'glass-card',
+    
+    // Flexbox utilities
+    'flex',
+    'flex-wrap',
+    'flex-col',
+    'flex-row',
+    'justify-center',
+    'items-center',
+    
+    // Responsive variants
+    'sm:max-w-sm',
+    'md:max-w-md',
+    'lg:max-w-lg',
+    'xl:max-w-xl',
+    'sm:w-full',
+    'md:w-auto',
+    'lg:w-1/3'
   ],
   theme: {
     extend: {
