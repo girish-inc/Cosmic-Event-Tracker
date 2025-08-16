@@ -4,6 +4,23 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  safelist: [
+    'max-w-sm',
+    'max-w-md',
+    'max-w-lg',
+    'max-w-xl',
+    'w-full',
+    'mx-auto',
+    'grid-cols-1',
+    'md:grid-cols-2',
+    'lg:grid-cols-3',
+    'gap-4',
+    'gap-6',
+    'glass-card',
+    'space-y-3',
+    'space-y-6',
+    'space-y-12'
+  ],
   theme: {
     extend: {
       colors: {
