@@ -1,44 +1,49 @@
-import { useAuth } from '../context/AuthContext'
-import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
-const Header = () => {
-  const { user, signOut } = useAuth()
-  const navigate = useNavigate()
-
-  const handleLogout = async () => {
-    try {
-      await signOut()
-      navigate('/login')
-    } catch (error) {
-      console.error('Error signing out:', error)
-    }
-  }
+function Header() {
+  const { user, signOut } = useAuth();
 
   return (
-    <header className="bg-primary-900 border-b border-primary-700 px-4 py-4">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <div className="flex items-center space-x-4">
-          <h1 className="text-2xl font-bold text-white">
-            🌌 Cosmic Event Tracker
-          </h1>
-        </div>
+    <header className="fixed top-0 left-0 right-0 text-white p-6 shadow-lg z-50 mb-8" style={{backgroundColor: '#1E3A8A'}}>
+      <div className="container mx-auto flex justify-between items-center">
+        <div className="flex-1"></div>
         
-        {user && (
-          <div className="flex items-center space-x-4">
-            <span className="text-primary-200">
-              Welcome, {user.email}
-            </span>
-            <button
-              onClick={handleLogout}
-              className="btn-secondary"
-            >
-              Logout
-            </button>
-          </div>
-        )}
+        <Link to="/" className="text-3xl font-bold text-white text-center flex-1">
+          Cosmic Event Tracker
+        </Link>
+        
+        <div className="flex-1 flex justify-end">
+          {user ? (
+            <div className="flex items-center space-x-4">
+              <span className="text-white font-medium">Welcome, {user.email}</span>
+              <button
+                onClick={signOut}
+                className="glass-button-primary"
+              >
+                LOGOUT
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center space-x-4">
+              <Link 
+                to="/login" 
+                className="glass-button-primary"
+              >
+                LOGIN
+              </Link>
+              <Link 
+                to="/signup" 
+                className="glass-button-primary"
+              >
+                SIGNUP
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;

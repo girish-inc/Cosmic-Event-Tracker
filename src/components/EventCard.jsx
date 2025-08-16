@@ -1,64 +1,61 @@
-import { Link } from 'react-router-dom'
-import { getAverageDiameter, formatCloseApproachDate } from '../utils/nasa'
+import { Link } from 'react-router-dom';
+import { getAverageDiameter, formatCloseApproachDate } from '../utils/nasa';
 
-const EventCard = ({ neo }) => {
-  const averageDiameter = getAverageDiameter(neo)
-  const closeApproach = neo.close_approach_data?.[0]
-  const isHazardous = neo.is_potentially_hazardous_asteroid
+function EventCard({ neo }) {
+  const averageDiameter = getAverageDiameter(neo);
+  const closeApproachDate = formatCloseApproachDate(neo.close_approach_data[0]?.close_approach_date);
+  const missDistance = neo.close_approach_data[0]?.miss_distance?.kilometers;
 
   return (
-    <div className="card hover:bg-primary-800 transition-colors duration-200">
-      <div className="flex justify-between items-start mb-3">
-        <h3 className="text-lg font-semibold text-white truncate pr-2">
+    <div className="glass-card p-6 m-4 text-white">
+      {/* Header with status indicator */}
+      <div className="flex justify-between items-start mb-4">
+        <h3 className="text-xl font-bold text-white">
           {neo.name}
         </h3>
-        <div className="flex items-center space-x-2 flex-shrink-0">
-          {isHazardous && (
-            <span className="bg-red-600 text-white text-xs px-2 py-1 rounded-full">
-              ⚠️ Hazardous
-            </span>
-          )}
-          <span className="bg-primary-700 text-primary-200 text-xs px-2 py-1 rounded-full">
-            {averageDiameter} km
-          </span>
+        <div className={`px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider ${
+          neo.is_potentially_hazardous_asteroid 
+            ? 'text-white' 
+            : 'text-white'
+        }`} style={{backgroundColor: neo.is_potentially_hazardous_asteroid ? '#EF4444' : '#22C55E'}}>
+          {neo.is_potentially_hazardous_asteroid ? '⚠️ Hazardous' : '✅ Safe'}
         </div>
       </div>
-
-      <div className="space-y-2 text-sm text-primary-300">
-        <div className="flex justify-between">
-          <span>Diameter (avg):</span>
-          <span className="text-white">{averageDiameter} km</span>
+      
+      {/* Data grid */}
+      <div className="space-y-3 mb-6">
+        <div className="flex justify-between items-center p-3 rounded-lg border" style={{background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)', borderColor: 'rgba(255, 255, 255, 0.1)'}}>
+          <span className="text-gray-200 font-semibold">Diameter</span>
+          <span className="text-white font-bold">{averageDiameter} km</span>
         </div>
         
-        {closeApproach && (
-          <>
-            <div className="flex justify-between">
-              <span>Closest Approach:</span>
-              <span className="text-white">
-                {formatCloseApproachDate(closeApproach.close_approach_date_full)}
-              </span>
-            </div>
-            
-            <div className="flex justify-between">
-              <span>Miss Distance:</span>
-              <span className="text-white">
-                {parseFloat(closeApproach.miss_distance.kilometers).toLocaleString()} km
-              </span>
-            </div>
-          </>
+        <div className="flex justify-between items-center p-3 rounded-lg border" style={{background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)', borderColor: 'rgba(255, 255, 255, 0.1)'}}>
+          <span className="text-gray-200 font-semibold">Closest Approach</span>
+          <span className="text-white font-bold">{closeApproachDate}</span>
+        </div>
+        
+        {missDistance && (
+          <div className="flex justify-between items-center p-3 rounded-lg border" style={{background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)', borderColor: 'rgba(255, 255, 255, 0.1)'}}>
+            <span className="text-gray-200 font-semibold">Miss Distance</span>
+            <span className="text-white font-bold">{parseFloat(missDistance).toLocaleString()} km</span>
+          </div>
         )}
       </div>
-
-      <div className="mt-4 pt-3 border-t border-primary-700">
-        <Link
+      
+      {/* Action button */}
+      <div className="pt-4 border-t" style={{borderColor: 'rgba(255, 255, 255, 0.1)'}}>
+        <Link 
           to={`/event/${neo.id}`}
-          className="text-primary-400 hover:text-primary-300 text-sm font-medium"
+          className="underline w-full text-center block font-medium transition-colors"
+          style={{color: '#6B46C1'}}
+          onMouseEnter={(e) => e.target.style.color = '#553C9A'}
+          onMouseLeave={(e) => e.target.style.color = '#6B46C1'}
         >
-          View Details →
+          View Details
         </Link>
       </div>
     </div>
-  )
+  );
 }
 
-export default EventCard
+export default EventCard;

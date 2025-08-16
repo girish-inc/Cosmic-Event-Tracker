@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <radialGradient id="asteroidGrad" cx="0.3" cy="0.3" r="0.8">
+      <stop offset="0%" stop-color="#8B7355"/>
+      <stop offset="50%" stop-color="#5D4E37"/>
+      <stop offset="100%" stop-color="#3C2F1F"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Main asteroid body -->
+  <ellipse cx="16" cy="16" rx="14" ry="12" fill="url(#asteroidGrad)"/>
+  
+  <!-- Surface craters and details -->
+  <circle cx="10" cy="12" r="2" fill="#3C2F1F" opacity="0.6"/>
+  <circle cx="20" cy="18" r="1.5" fill="#3C2F1F" opacity="0.5"/>
+  <circle cx="14" cy="20" r="1" fill="#3C2F1F" opacity="0.4"/>
+  <circle cx="22" cy="10" r="1" fill="#3C2F1F" opacity="0.3"/>
+  
+  <!-- Rough edges and bumps -->
+  <path d="M 2 16 Q 4 14 6 16 Q 8 18 10 16 Q 12 14 14 16" fill="none" stroke="#3C2F1F" stroke-width="0.5" opacity="0.3"/>
+  <path d="M 18 16 Q 20 14 22 16 Q 24 18 26 16 Q 28 14 30 16" fill="none" stroke="#3C2F1F" stroke-width="0.5" opacity="0.3"/>
+</svg>

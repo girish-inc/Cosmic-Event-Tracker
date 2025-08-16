@@ -8,7 +8,8 @@ const formatDate = (date) => {
 
 // Get date range for API calls
 const getDateRange = (startDate, days = 7) => {
-  const start = new Date(startDate)
+  // Use current date if no startDate provided
+  const start = startDate ? new Date(startDate) : new Date()
   const end = new Date(start)
   end.setDate(start.getDate() + days - 1)
   
@@ -31,7 +32,16 @@ export const fetchNEOs = async (startDate, days = 7) => {
     }
     
     const data = await response.json()
-    return data.near_earth_objects
+    
+    // Flatten the near_earth_objects object into a single array
+    const neosByDate = data.near_earth_objects
+    const allNeos = []
+    
+    for (const date in neosByDate) {
+      allNeos.push(...neosByDate[date])
+    }
+    
+    return allNeos
   } catch (error) {
     console.error('Error fetching NEOs:', error)
     throw error
@@ -68,7 +78,15 @@ export const getAverageDiameter = (neo) => {
 
 // Helper function to format close approach date
 export const formatCloseApproachDate = (dateString) => {
+  if (!dateString) return 'Unknown'
+  
   const date = new Date(dateString)
+  
+  // Check if date is valid
+  if (isNaN(date.getTime())) {
+    return 'Invalid Date'
+  }
+  
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
